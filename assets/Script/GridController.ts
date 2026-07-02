@@ -118,6 +118,11 @@ export class GridController extends Component {
     private static tutorialColumnKey: string | null = null;
     private static tutorialStep: number = 0; // 0 = off, 1 = first shown, 2 = second shown
     private static tutorialCurrentBox: GridController | null = null;
+    // Sequence support: allow comma-separated list like "5,1,9" in `tutorialStartCell`
+    private static tutorialSequence: string[] = [];
+    private static tutorialSeqIndex: number = 0;
+    private static tutorialRepeatTimes: number = 2; // how many times to show per node
+    private static tutorialCurrentRepeat: number = 0;
     private readonly IDLE_THRESHOLD: number = 10;
 
     private static allBoxes: GridController[] = [];
@@ -880,6 +885,21 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         // If designer specified an explicit start cell (Inspector), try to use it.
         if (this.tutorialStartCell && this.tutorialStartCell.trim().length > 0) {
             const raw = this.tutorialStartCell.trim();
+
+            // Case A: Comma-separated sequence (e.g. "5,1,9")
+            if (raw.includes(",") && !raw.includes("/")) {
+                const tokens = raw.split(",").map(s => s.trim()).filter(s => s.length > 0);
+                if (tokens.length > 0) {
+                    GridController.tutorialSequence = tokens;
+                    GridController.tutorialSeqIndex = 0;
+                    GridController.tutorialCurrentRepeat = 0;
+                    guideOwner.showGuideLabel();
+                    this.startTutorialSequenceFromList();
+                    return;
+                }
+            }
+
+            // Case B: Parent/child or single token (backward-compatible)
             const sep = raw.includes("/") ? "/" : raw.includes(",") ? "," : null;
             let targetBox: GridController | undefined;
             if (sep) {
@@ -915,7 +935,8 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
             GridController.tutorialStep = 1;
             // Pick the top-most unsolved box in that column as first target
             const columnBoxes = GridController.allBoxes.filter(b => b.getColumnKey() === chosenColumn && !b.isSolved);
-            columnBoxes.sort((a, b) => b.node.worldPosition.y - a.node.worldPosition.y);
+            // Sort ascending so the bottom-most box is first (we want last grid cell → top)
+            columnBoxes.sort((a, b) => a.node.worldPosition.y - b.node.worldPosition.y);
             const firstBox = columnBoxes[0] || this;
             GridController.tutorialCurrentBox = firstBox;
 
@@ -928,6 +949,106 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         const handTarget = GridController.allBoxes.find(box => !box.isSolved && box.associatedHint && box.associatedHint.active) || this;
         guideOwner.showGuideLabel();
         if (handTarget.associatedHint && handTarget.associatedHint.active) handTarget.showIdleHint();
+    }
+
+    // Play a tutorial sequence defined by `tutorialSequence`.
+    // Each named node will have the hand shown `tutorialRepeatTimes` times, then the sequence advances.
+    private startTutorialSequenceFromList() {
+        if (!GridController.tutorialSequence || GridController.tutorialSequence.length === 0) return;
+
+        // Determine a default parent (e.g., Grid-001) to prefer when resolving short numeric names
+        const defaultParentName = GridController.allBoxes.find(b => b.node.parent && b.node.parent.isValid)?.node.parent.name || null;
+
+        const playStep = (index: number) => {
+            if (index >= GridController.tutorialSequence.length) {
+                // Completed sequence
+                GridController.tutorialSequence = [];
+                GridController.tutorialSeqIndex = 0;
+                GridController.tutorialCurrentRepeat = 0;
+                GridController.isHandShowing = false;
+                if (GridController.globalHandNode) {
+                    Tween.stopAllByTarget(GridController.globalHandNode);
+                    GridController.globalHandNode.setScale(v3(0, 0, 0));
+                    GridController.globalHandNode.active = false;
+                }
+                return;
+            }
+
+            const rawToken = GridController.tutorialSequence[index];
+            // Support formats: "GridName", "GridName:2" (child index, 1-based), "GridName/CellName"
+            let gridName = rawToken;
+            let childSpecifier: string | null = null;
+            if (rawToken.includes(":") || rawToken.includes("/") || rawToken.includes('.')) {
+                const sep = rawToken.includes(":") ? ":" : rawToken.includes("/") ? "/" : ".";
+                const parts = rawToken.split(sep).map(s => s.trim());
+                gridName = parts[0];
+                childSpecifier = parts[1] || null;
+            }
+
+            // Prefer a box under the same parent (common Grid container) when available
+            let targetBox = null as (GridController | null);
+            if (defaultParentName) {
+                targetBox = GridController.allBoxes.find(b => b.node.name === gridName && b.node.parent && b.node.parent.name === defaultParentName && !b.isSolved) || null;
+            }
+            if (!targetBox) {
+                targetBox = GridController.allBoxes.find(b => b.node.name === gridName && !b.isSolved) || null;
+            }
+
+            console.log(`[TUTORIAL] token='${rawToken}' -> resolved grid='${targetBox ? targetBox.node.name : 'NONE'}' (parent='${targetBox && targetBox.node.parent ? targetBox.node.parent.name : 'N/A'}')`);
+            if (!targetBox) {
+                // Skip missing/solved and continue
+                playStep(index + 1);
+                return;
+            }
+
+            GridController.tutorialSeqIndex = index;
+            GridController.tutorialCurrentRepeat = 0;
+
+            const showAndMaybeRepeat = () => {
+                if (!targetBox || targetBox.isSolved) {
+                    playStep(index + 1);
+                    return;
+                }
+                // Ensure any global flags allow showing
+                GridController.isHandShowing = false;
+                if (childSpecifier && targetBox) {
+                    // If numeric -> treat as 1-based index
+                    const maybeIndex = parseInt(childSpecifier);
+                    if (!isNaN(maybeIndex)) {
+                        targetBox.showIdleHintOnChildIndex(maybeIndex - 1);
+                    } else {
+                        targetBox.showIdleHintOnChildName(childSpecifier);
+                    }
+                } else {
+                    targetBox.showIdleHint();
+                }
+
+                // Hide after a short duration and either repeat or advance
+                this.scheduleOnce(() => {
+                    targetBox.hideTutorialElements("SequenceHide");
+                    GridController.isHandShowing = false;
+                    if (GridController.globalHandNode) {
+                        Tween.stopAllByTarget(GridController.globalHandNode);
+                        GridController.globalHandNode.setScale(v3(0, 0, 0));
+                        GridController.globalHandNode.active = false;
+                    }
+
+                    GridController.tutorialCurrentRepeat++;
+                    if (GridController.tutorialCurrentRepeat < GridController.tutorialRepeatTimes) {
+                        // Short gap then show again
+                        this.scheduleOnce(() => showAndMaybeRepeat(), 0.45);
+                    } else {
+                        // Advance to next in sequence
+                        this.scheduleOnce(() => playStep(index + 1), 0.45);
+                    }
+                }, 1.6);
+            };
+
+            // Start the first show for this step
+            showAndMaybeRepeat();
+        };
+
+        playStep(0);
     }
 
     private showGuideLabel() {
@@ -1507,7 +1628,8 @@ private manualStitchArc(g: Graphics, cx: number, cy: number, r: number, startDeg
             if (GridController.tutorialStep === 1 && GridController.tutorialCurrentBox === this) {
                 const candidates = GridController.allBoxes.filter(b => b.getColumnKey() === myCol && !b.isSolved && b !== this);
                 if (candidates.length > 0) {
-                    candidates.sort((a, b) => b.node.worldPosition.y - a.node.worldPosition.y);
+                    // Advance from bottom-most to top-most within the column
+                    candidates.sort((a, b) => a.node.worldPosition.y - b.node.worldPosition.y);
                     const nextBox = candidates[0];
                     GridController.tutorialStep = 2;
                     GridController.tutorialCurrentBox = nextBox;
@@ -1965,6 +2087,51 @@ private executeVoiceCall() {
         .call(() => this.playHandAnimation())
         .start();
 }
+
+    // Show the idle hint but position the hand over a specific child node (by index)
+    public showIdleHintOnChildIndex(index: number) {
+        if (GridController.isGameOver || !GridController.globalHandNode) return;
+        const children = this.node.children.filter(c => c.isValid && c.active);
+        if (index < 0 || index >= children.length) {
+            // fallback to default
+            this.showIdleHint();
+            return;
+        }
+        const targetChild = children[index];
+        this.showIdleHintOnNode(targetChild);
+    }
+
+    // Show the idle hint on a child node by name
+    public showIdleHintOnChildName(childName: string) {
+        if (GridController.isGameOver || !GridController.globalHandNode) return;
+        const child = this.node.getChildByName(childName);
+        if (!child) { this.showIdleHint(); return; }
+        this.showIdleHintOnNode(child);
+    }
+
+    // Core helper: show hand targeted at the given node
+    private showIdleHintOnNode(target: Node) {
+        if (GridController.isGameOver || !GridController.globalHandNode) return;
+        if (GridController.isHandShowing) return;
+
+        GridController.isHandShowing = true;
+        this.applyPulse(this.node, true);
+        if (this.associatedHint && this.associatedHint.active) this.applyPulse(this.associatedHint, true);
+
+        this.playNextAvailableVoice();
+        const hand = GridController.globalHandNode;
+        hand.active = true;
+        hand.setSiblingIndex(999);
+
+        const targetPos = target.worldPosition;
+        hand.setWorldPosition(v3(targetPos.x + 50, targetPos.y - 90, 0));
+
+        hand.setScale(v3(0, 0, 0));
+        tween(hand)
+            .to(0.3, { scale: GridController.initialHandScale }, { easing: 'backOut' })
+            .call(() => this.playHandAnimation())
+            .start();
+    }
 
 private playHandAnimation() {
     const hand = GridController.globalHandNode;

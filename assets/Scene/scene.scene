@@ -2882,7 +2882,7 @@
     "introBubble": {
       "__id__": 162
     },
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "5",
     "heartSprites": [
       {
@@ -3458,7 +3458,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "1",
     "heartSprites": [
       {
@@ -6272,7 +6272,7 @@
         "__id__": 161
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 179
@@ -8680,7 +8680,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "2",
     "heartSprites": [
       {
@@ -9849,7 +9849,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "3",
     "heartSprites": [
       {
@@ -10972,7 +10972,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "4",
     "heartSprites": [
       {
@@ -12100,7 +12100,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "6",
     "heartSprites": [
       {
@@ -13223,7 +13223,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "7",
     "heartSprites": [
       {
@@ -14346,7 +14346,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "8",
     "heartSprites": [
       {
@@ -15476,7 +15476,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "9",
     "heartSprites": [
       {
@@ -16853,7 +16853,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "10",
     "heartSprites": [
       {
@@ -17976,7 +17976,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "11",
     "heartSprites": [
       {
@@ -19097,7 +19097,7 @@
     "introNormalCharacter": null,
     "introCryCharacter": null,
     "introBubble": null,
-    "introBubbleLabel": null,
+    "tutorialStartCell": "",
     "correctItemName": "12",
     "heartSprites": [
       {
