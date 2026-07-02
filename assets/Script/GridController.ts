@@ -37,6 +37,21 @@ export class GridController extends Component {
     @property([Node])
     introCharacters: Node[] = [];
 
+    @property(Node)
+    introNormalCharacter: Node = null!;
+
+    @property(Node)
+    introCryCharacter: Node = null!;
+
+    @property(Node)
+    introBubble: Node = null!;
+
+    @property(String)
+    tutorialStartCell: string = ""; // e.g. "5" or "5,1" or "5/1" to target a specific grid node
+
+    // @property(Label)
+    // introBubbleLabel: Label = null!;
+
     @property(String)
     correctItemName: string = "";
 
@@ -99,6 +114,10 @@ export class GridController extends Component {
     private static isHandShowing: boolean = false;
     private static initialHandScale: Vec3 = v3(1, 1, 1);
     private static hasShownFirstTapHand: boolean = false;
+    // Tutorial-specific state: show hand on two cells in same column
+    private static tutorialColumnKey: string | null = null;
+    private static tutorialStep: number = 0; // 0 = off, 1 = first shown, 2 = second shown
+    private static tutorialCurrentBox: GridController | null = null;
     private readonly IDLE_THRESHOLD: number = 10;
 
     private static allBoxes: GridController[] = [];
@@ -645,20 +664,125 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         }
         introOpacity.opacity = 0;
 
-        this.introContainer.setScale(v3(0.9, 0.9, 0.9));
-
         GridController.hasIntroPlayed = true;
-        const introTween = tween(this.introContainer)
-            .to(0.8, { scale: v3(1, 1, 1) }, { easing: 'sineOut' });
-
         tween(introOpacity)
             .to(0.8, { opacity: 255 }, { easing: 'linear' })
             .start();
 
-        introTween.call(() => {
+        this.scheduleOnce(() => {
+            this.setupIntroEmotionState();
             this.animateIntroCharacters();
-            this.scheduleOnce(() => this.hideIntroAndStartGame(), 2.4);
-        }).start();
+            this.scheduleOnce(() => this.switchToCryIntro(), 2.0);
+            this.scheduleOnce(() => this.hideIntroAndStartGame(), 5);
+        }, 0);
+    }
+
+    private setupIntroEmotionState() {
+        if (this.introNormalCharacter) {
+            this.introNormalCharacter.active = true;
+            let normalOpacity = this.introNormalCharacter.getComponent(UIOpacity);
+            if (!normalOpacity) normalOpacity = this.introNormalCharacter.addComponent(UIOpacity);
+            normalOpacity.opacity = 255;
+        }
+        if (this.introCryCharacter) {
+            this.introCryCharacter.active = false;
+            let cryOpacity = this.introCryCharacter.getComponent(UIOpacity);
+            if (!cryOpacity) cryOpacity = this.introCryCharacter.addComponent(UIOpacity);
+            cryOpacity.opacity = 0;
+        }
+        if (this.introBubble) {
+            this.introBubble.active = false;
+            let bubbleOpacity = this.introBubble.getComponent(UIOpacity);
+            if (!bubbleOpacity) bubbleOpacity = this.introBubble.addComponent(UIOpacity);
+            bubbleOpacity.opacity = 0;
+        }
+        // if (this.introBubbleLabel) {
+        //     this.introBubbleLabel.string = "";
+        //     this.introBubbleLabel.node.active = false;
+        //     let labelOpacity = this.introBubbleLabel.node.getComponent(UIOpacity);
+        //     if (!labelOpacity) labelOpacity = this.introBubbleLabel.node.addComponent(UIOpacity);
+        //     labelOpacity.opacity = 0;
+        // }
+    }
+
+    private switchToCryIntro() {
+        const bubbleText = "I was going through the photos";
+        // Ensure normal fades out first; then show cry, then bubble after a short delay
+        const startCryAndBubble = () => {
+            if (this.introCryCharacter) {
+                this.introCryCharacter.active = true;
+                let cryOpacity = this.introCryCharacter.getComponent(UIOpacity);
+                if (!cryOpacity) cryOpacity = this.introCryCharacter.addComponent(UIOpacity);
+                cryOpacity.opacity = 0;
+
+                // Fade in cry
+                tween(cryOpacity)
+                    .to(0.45, { opacity: 255 }, { easing: 'linear' })
+                    .start();
+
+                // Show bubble a little after cry starts (so cry is visible first)
+                this.scheduleOnce(() => {
+                    if (!this.introBubble) return;
+                    this.introBubble.active = true;
+                    let bubbleOpacity = this.introBubble.getComponent(UIOpacity);
+                    if (!bubbleOpacity) bubbleOpacity = this.introBubble.addComponent(UIOpacity);
+                    bubbleOpacity.opacity = 0;
+
+                    const finalPos = this.introBubble.position.clone();
+                    this.introBubble.setPosition(v3(finalPos.x, finalPos.y - 30, finalPos.z));
+
+                    tween(this.introBubble)
+                        .to(1, { position: finalPos }, { easing: 'backOut' })
+                        .call(() => {
+                            // subtle pulse after slide completes
+                            const baseScale = this.introBubble.scale.clone();
+                            Tween.stopAllByTarget(this.introBubble);
+                            tween(this.introBubble)
+                                .repeatForever(
+                                    tween()
+                                        .to(0.7, { scale: v3(baseScale.x * 1.06, baseScale.y * 1.06, baseScale.z) }, { easing: 'sineInOut' })
+                                        .to(0.7, { scale: baseScale }, { easing: 'sineInOut' })
+                                )
+                                .start();
+                        })
+                        .start();
+
+                    tween(bubbleOpacity)
+                        .to(0.45, { opacity: 255 }, { easing: 'linear' })
+                        .start();
+                }, 0.18);
+            }
+        };
+
+        if (this.introNormalCharacter) {
+            let normalOpacity = this.introNormalCharacter.getComponent(UIOpacity);
+            if (!normalOpacity) normalOpacity = this.introNormalCharacter.addComponent(UIOpacity);
+            tween(normalOpacity)
+                .to(0.35, { opacity: 0 }, { easing: 'sineInOut' })
+                .call(() => {
+                    if (this.introNormalCharacter) this.introNormalCharacter.active = false;
+                    // Start cry and bubble after normal has fully faded
+                    startCryAndBubble();
+                })
+                .start();
+        } else {
+            // No normal character present — start cry immediately
+            startCryAndBubble();
+        }
+
+        // if (this.introBubbleLabel) {
+        //     this.introBubbleLabel.string = bubbleText;
+        //     this.introBubbleLabel.node.active = true;
+
+        //     let labelOpacity = this.introBubbleLabel.node.getComponent(UIOpacity);
+        //     if (!labelOpacity) labelOpacity = this.introBubbleLabel.node.addComponent(UIOpacity);
+        //     labelOpacity.opacity = 0;
+
+        //     tween(labelOpacity)
+        //         .delay(0.15)
+        //         .to(0.3, { opacity: 255 }, { easing: 'linear' })
+        //         .start();
+        // }
     }
 
     private animateIntroCharacters() {
@@ -713,23 +837,20 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         Tween.stopAllByTarget(this.introContainer);
         const introOpacity = this.introContainer.getComponent(UIOpacity);
 
-        const hideTween = tween(this.introContainer)
-            .to(0.45, { scale: v3(0.85, 0.85, 0.85) }, { easing: 'sineInOut' });
-
         if (introOpacity) {
             tween(introOpacity)
                 .to(0.45, { opacity: 0 }, { easing: 'linear' })
                 .start();
         }
 
-        hideTween.call(() => {
+        this.scheduleOnce(() => {
             this.introContainer.active = false;
             if (introOpacity) {
                 introOpacity.opacity = 0;
             }
             GridController.isIntroPlaying = false;
             this.startGameplay();
-        }).start();
+        }, 0);
     }
 
     private performStartupSequence() {
@@ -754,20 +875,59 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
 
     private showInitialTutorial() {
         if (GridController.isGameOver || GridController.isTimerStarted) return;
-
         const guideOwner = GridController.allBoxes.find(box => box.guideNode) || this;
-        const handTarget = GridController.allBoxes.find(box =>
-            !box.isSolved &&
-            box.associatedHint &&
-            box.associatedHint.active
-        ) || this;
 
-        guideOwner.showGuideLabel();
-        // handTarget.showSelectedFrame();
+        // If designer specified an explicit start cell (Inspector), try to use it.
+        if (this.tutorialStartCell && this.tutorialStartCell.trim().length > 0) {
+            const raw = this.tutorialStartCell.trim();
+            const sep = raw.includes("/") ? "/" : raw.includes(",") ? "," : null;
+            let targetBox: GridController | undefined;
+            if (sep) {
+                const parts = raw.split(sep).map(s => s.trim());
+                const parentName = parts[0];
+                const childName = parts[1];
+                targetBox = GridController.allBoxes.find(b => b.node.name === childName && b.node.parent && b.node.parent.name === parentName);
+            } else {
+                // single token — match node name directly
+                targetBox = GridController.allBoxes.find(b => b.node.name === raw);
+            }
 
-        if (handTarget.associatedHint && handTarget.associatedHint.active) {
-            handTarget.showIdleHint();
+            if (targetBox && !targetBox.isSolved) {
+                GridController.tutorialColumnKey = targetBox.getColumnKey();
+                GridController.tutorialStep = 1;
+                GridController.tutorialCurrentBox = targetBox;
+                guideOwner.showGuideLabel();
+                targetBox.showIdleHint();
+                return;
+            }
         }
+
+        // Prefer a column that has at least two unsolved boxes for the two-step tutorial
+        let chosenColumn: string | null = null;
+        for (const box of GridController.allBoxes) {
+            const col = box.getColumnKey();
+            const count = GridController.allBoxes.filter(b => b.getColumnKey() === col && !b.isSolved).length;
+            if (count >= 2) { chosenColumn = col; break; }
+        }
+
+        if (chosenColumn) {
+            GridController.tutorialColumnKey = chosenColumn;
+            GridController.tutorialStep = 1;
+            // Pick the top-most unsolved box in that column as first target
+            const columnBoxes = GridController.allBoxes.filter(b => b.getColumnKey() === chosenColumn && !b.isSolved);
+            columnBoxes.sort((a, b) => b.node.worldPosition.y - a.node.worldPosition.y);
+            const firstBox = columnBoxes[0] || this;
+            GridController.tutorialCurrentBox = firstBox;
+
+            guideOwner.showGuideLabel();
+            firstBox.showIdleHint();
+            return;
+        }
+
+        // Fallback: show hand on any available hint target
+        const handTarget = GridController.allBoxes.find(box => !box.isSolved && box.associatedHint && box.associatedHint.active) || this;
+        guideOwner.showGuideLabel();
+        if (handTarget.associatedHint && handTarget.associatedHint.active) handTarget.showIdleHint();
     }
 
     private showGuideLabel() {
@@ -1338,6 +1498,46 @@ private manualStitchArc(g: Graphics, cx: number, cy: number, r: number, startDeg
     itemNode.active = false;
     const button = itemNode.getComponent(Button);
     if (button) button.interactable = false;
+
+    // Tutorial: advance hand to next cell in column or hide after second
+    if (GridController.tutorialColumnKey) {
+        const myCol = this.getColumnKey();
+        if (myCol === GridController.tutorialColumnKey) {
+            // If we're on the first step and this was the current tutorial box, move hand to next
+            if (GridController.tutorialStep === 1 && GridController.tutorialCurrentBox === this) {
+                const candidates = GridController.allBoxes.filter(b => b.getColumnKey() === myCol && !b.isSolved && b !== this);
+                if (candidates.length > 0) {
+                    candidates.sort((a, b) => b.node.worldPosition.y - a.node.worldPosition.y);
+                    const nextBox = candidates[0];
+                    GridController.tutorialStep = 2;
+                    GridController.tutorialCurrentBox = nextBox;
+                    // show hand on next after a short delay so animations don't clash
+                    this.scheduleOnce(() => {
+                        GridController.isHandShowing = false;
+                        nextBox.showIdleHint();
+                    }, 0.35);
+                } else {
+                    // nothing to advance to — end tutorial
+                    GridController.tutorialColumnKey = null;
+                    GridController.tutorialStep = 0;
+                    GridController.tutorialCurrentBox = null;
+                    GridController.isHandShowing = false;
+                    if (GridController.globalHandNode) GridController.globalHandNode.active = false;
+                }
+            } else if (GridController.tutorialStep === 2 && GridController.tutorialCurrentBox === this) {
+                // Completed second target — hide hand and clear tutorial
+                GridController.tutorialColumnKey = null;
+                GridController.tutorialStep = 0;
+                GridController.tutorialCurrentBox = null;
+                GridController.isHandShowing = false;
+                if (GridController.globalHandNode) {
+                    Tween.stopAllByTarget(GridController.globalHandNode);
+                    GridController.globalHandNode.setScale(v3(0, 0, 0));
+                    GridController.globalHandNode.active = false;
+                }
+            }
+        }
+    }
 
     this.closeSelectionMenu();
     this.executeFlyingMovement(flyNode, endPos, spriteFrame!, sourceSize, placedScale, startPos);
