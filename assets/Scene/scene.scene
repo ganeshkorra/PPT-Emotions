@@ -2916,7 +2916,7 @@
       "__uuid__": "86b37f4a-d573-48a0-ac18-d0d20fc3b89d@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -3186,7 +3186,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -410.958,
+      "x": -366.406,
       "y": -29.2,
       "z": 0
     },
@@ -3486,7 +3486,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -8226,7 +8226,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 418.721,
+      "x": 359.699,
       "y": -29.2,
       "z": 0
     },
@@ -8392,7 +8392,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1136.7,
+      "width": 947.6,
       "height": 306.5
     },
     "_anchorPoint": {
@@ -8824,7 +8824,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -9524,7 +9524,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1136.7,
+      "width": 947.6,
       "height": 306.5
     },
     "_anchorPoint": {
@@ -9997,7 +9997,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -10658,7 +10658,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1136.7,
+      "width": 947.6,
       "height": 306.5
     },
     "_anchorPoint": {
@@ -11116,7 +11116,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -11777,7 +11777,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1136.7,
+      "width": 947.6,
       "height": 306.5
     },
     "_anchorPoint": {
@@ -12248,7 +12248,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -13367,7 +13367,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -14486,7 +14486,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -15630,7 +15630,7 @@
       "__uuid__": "86b37f4a-d573-48a0-ac18-d0d20fc3b89d@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -17001,7 +17001,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -17695,7 +17695,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "e8ee0d95-e184-49ea-8301-69736e36e679@f9941",
+      "__uuid__": "ef039c30-a7a7-4dc9-b4fd-30ab47a9b903@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -18120,7 +18120,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -18812,7 +18812,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "e8ee0d95-e184-49ea-8301-69736e36e679@f9941",
+      "__uuid__": "5494705a-01e4-45b8-8ad3-bc0fcf9c42f2@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -19237,7 +19237,7 @@
     "handNode": null,
     "idleHandSprite": null,
     "clickHandSprite": null,
-    "totalMatchesNeeded": 8,
+    "totalMatchesNeeded": 12,
     "successRotationEffect": {
       "__id__": 194
     },
@@ -19929,7 +19929,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "e8ee0d95-e184-49ea-8301-69736e36e679@f9941",
+      "__uuid__": "4c0c552d-d870-4983-993f-e13f4e7c7e25@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,

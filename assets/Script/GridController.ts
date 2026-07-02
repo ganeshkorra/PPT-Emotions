@@ -251,6 +251,10 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         return next;
     }
 
+    private getColumnSize(columnKey: string): number {
+        return GridController.allBoxes.filter(box => box.getColumnKey() === columnKey).length;
+    }
+
     private revealDecorationForPlacedItem() {
         if (!this.decorationNode?.isValid) return;
 
@@ -362,7 +366,7 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         const menuTrans = this.selectionMenu.getComponent(UITransform);
         if (!menuTrans) return;
 
-        const itemGap = 14;
+        const itemGap = 54;
         const horizontalPadding = 28;
         const verticalPadding = 24;
         let itemsWidth = 0;
@@ -1350,7 +1354,10 @@ private manualStitchArc(g: Graphics, cx: number, cy: number, r: number, startDeg
             flyNode.name = "PlacedItem";
             const columnKey = this.getColumnKey();
             const solvedCount = GridController.incrementColumnCompletion(columnKey);
-            if (solvedCount === 2 && !GridController.completedColumnDecorations.has(columnKey)) {
+            const columnSize = this.getColumnSize(columnKey);
+            const requiredCompletion = Math.max(2, Math.min(3, columnSize));
+
+            if (solvedCount >= requiredCompletion && !GridController.completedColumnDecorations.has(columnKey)) {
                 GridController.completedColumnDecorations.add(columnKey);
                 this.showColumnCompletionDecoration(columnKey);
             }
