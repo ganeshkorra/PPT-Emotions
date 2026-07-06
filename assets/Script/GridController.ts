@@ -677,8 +677,8 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
         this.scheduleOnce(() => {
             this.setupIntroEmotionState();
             this.animateIntroCharacters();
-            this.scheduleOnce(() => this.switchToCryIntro(), 2.0);
-            this.scheduleOnce(() => this.hideIntroAndStartGame(), 5);
+            this.scheduleOnce(() => this.switchToCryIntro(), 0.0);
+            this.scheduleOnce(() => this.hideIntroAndStartGame(), 3);
         }, 0);
     }
 
@@ -763,7 +763,7 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
             let normalOpacity = this.introNormalCharacter.getComponent(UIOpacity);
             if (!normalOpacity) normalOpacity = this.introNormalCharacter.addComponent(UIOpacity);
             tween(normalOpacity)
-                .to(0.35, { opacity: 0 }, { easing: 'sineInOut' })
+                .to(0, { opacity: 0 }, { easing: 'sineInOut' })
                 .call(() => {
                     if (this.introNormalCharacter) this.introNormalCharacter.active = false;
                     // Start cry and bubble after normal has fully faded
@@ -809,8 +809,8 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
             opacity.opacity = 0;
         });
 
-        const duration = 0.6;
-        const delayStep = 0.2;
+        const duration = 0.0;
+        const delayStep = 0;
 
         charNodes.forEach((charNode, index) => {
             const finalPos = charNode.position.clone();
