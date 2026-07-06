@@ -2997,9 +2997,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -3143,9 +3143,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -8362,9 +8362,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -9490,9 +9490,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -10620,9 +10620,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -11743,9 +11743,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -11856,7 +11856,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -12334,7 +12334,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -12510,7 +12510,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -12686,7 +12686,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -12871,9 +12871,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -12984,7 +12984,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -13457,7 +13457,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -13633,7 +13633,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -13809,7 +13809,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -13994,9 +13994,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -14107,7 +14107,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -14580,7 +14580,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -14756,7 +14756,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -14932,7 +14932,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -15119,9 +15119,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -16495,9 +16495,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -17623,9 +17623,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -18744,9 +18744,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.505,
-      "y": 0.505,
-      "z": 0.364
+      "x": 0.34,
+      "y": 0.34,
+      "z": 0.246
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -19969,7 +19969,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -20145,7 +20145,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -20323,7 +20323,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -20501,7 +20501,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,

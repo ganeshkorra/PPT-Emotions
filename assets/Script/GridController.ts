@@ -1957,17 +1957,66 @@ private executeVoiceCall() {
 }
 
     private showRedFrame() {
-        let frameNode = this.node.getChildByName("ErrorFrame");
-        if (!frameNode) { frameNode = new Node("ErrorFrame"); this.node.addChild(frameNode); }
+        const canvas = director.getScene()?.getChildByPath("Canvas");
+        let frameNode: Node | null = null;
+
+        if (canvas) {
+            frameNode = canvas.getChildByName("ErrorFrame");
+            if (!frameNode) {
+                frameNode = new Node("ErrorFrame");
+                canvas.addChild(frameNode);
+            } else if (frameNode.parent !== canvas) {
+                frameNode.parent = canvas;
+            }
+        } else {
+            frameNode = this.node.getChildByName("ErrorFrame");
+            if (!frameNode) {
+                frameNode = new Node("ErrorFrame");
+                this.node.addChild(frameNode);
+            }
+        }
+
         const graphics = frameNode.getComponent(Graphics) || frameNode.addComponent(Graphics);
         const uiOpacity = frameNode.getComponent(UIOpacity) || frameNode.addComponent(UIOpacity);
         frameNode.active = true;
         uiOpacity.opacity = 255;
+
         const uiTrans = this.node.getComponent(UITransform);
         const w = uiTrans ? uiTrans.contentSize.width : 100;
         const h = uiTrans ? uiTrans.contentSize.height : 100;
-        graphics.clear(); graphics.lineWidth = 12; graphics.strokeColor = Color.RED; graphics.rect(-w / 2, -h / 2, w, h); graphics.stroke();
-        tween(frameNode).to(0.1, { scale: v3(1.05, 1.05, 1) }).to(0.1, { scale: v3(1, 1, 1) }).start();
+
+        // Position and scale the frame so it aligns with the grid box in Canvas space
+        if (canvas) {
+            frameNode.setWorldPosition(this.node.worldPosition);
+            const desiredScale = this.getCanvasRelativeScale(this.node.worldScale || this.node.scale);
+            frameNode.setScale(desiredScale);
+
+            // Place the ErrorFrame behind the selection menu when the menu is present on the Canvas
+            try {
+                if (this.selectionMenu && this.selectionMenu.isValid && this.selectionMenu.parent === canvas && this.selectionMenu.active) {
+                    const selIndex = this.selectionMenu.getSiblingIndex();
+                    frameNode.setSiblingIndex(Math.max(0, selIndex - 1));
+                } else {
+                    // Default: put on top of Canvas children
+                    frameNode.setSiblingIndex(Math.max(0, canvas.children.length - 1));
+                }
+            } catch (e) {
+                frameNode.setSiblingIndex(Math.max(0, canvas.children.length - 1));
+            }
+        } else {
+            frameNode.setPosition(0, 0, 0);
+            frameNode.setScale(v3(1, 1, 1));
+            frameNode.setSiblingIndex(Math.max(0, this.node.children.length - 1));
+        }
+
+        graphics.clear();
+        graphics.lineWidth = 18;
+        graphics.strokeColor = Color.RED;
+        graphics.rect(-w / 2, -h / 2, w, h);
+        graphics.stroke();
+
+        const originalScale = frameNode.scale.clone();
+        tween(frameNode).to(0.1, { scale: v3(originalScale.x * 1.0, originalScale.y * 1.0, 1) }).to(0.1, { scale: originalScale }).start();
         tween(uiOpacity).to(0.1, { opacity: 100 }).to(0.1, { opacity: 255 }).to(0.1, { opacity: 100 }).to(0.1, { opacity: 255 }).delay(0.6).to(0.2, { opacity: 0 }).call(() => { frameNode!.active = false; }).start();
     }
 
