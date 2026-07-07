@@ -428,7 +428,7 @@ highlightBar: ProgressBar = null!; // Link this to the 'Highlight Text' node in 
             const visualX = contentCenterX + cursorX + visualWidth / 2;
             visual.setPosition(v3(visualX, itemLayoutY, 0));
 
-            const offset = this.menuItemVisualOffsets.get(item) || v3(0, 0, 0);
+            const offset = this.menuItemVisualOffsets.get(item) || v3(0, 15, 0);
             item.setPosition(v3(visualX + offset.x, itemLayoutY + offset.y, 0));
             item.setSiblingIndex(visual.getSiblingIndex() + 1);
             cursorX += visualWidth + itemGap;
