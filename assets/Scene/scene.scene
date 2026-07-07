@@ -383,8 +383,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -300.873,
-      "y": 68.865,
+      "x": -281.814,
+      "y": 72.168,
       "z": 0
     },
     "_lrot": {
@@ -396,9 +396,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.603,
-      "y": 0.603,
-      "z": 0.603
+      "x": 0.682,
+      "y": 0.682,
+      "z": 0.682
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -453,12 +453,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "804f05e7-d3f8-4183-9765-55ac281d97a9@f9941",
+      "__uuid__": "b51cccfb-2cf7-44bd-aea1-7980b3c19880@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -614,9 +614,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.488,
-      "y": 0.488,
-      "z": 0.488
+      "x": 0.54,
+      "y": 0.54,
+      "z": 0.54
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -671,12 +671,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "66cd2460-b761-42dc-9c40-5346a9b20274@f9941",
+      "__uuid__": "b02d01a4-7442-40a6-8217-f0e1665263be@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -819,8 +819,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -100.89,
-      "y": 132.371,
+      "x": -80.73,
+      "y": 121.362,
       "z": 0
     },
     "_lrot": {
@@ -832,9 +832,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.574,
-      "y": 0.574,
-      "z": 0.574
+      "x": 0.699,
+      "y": 0.699,
+      "z": 0.699
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -889,12 +889,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "eb07f46b-dda5-4cc8-b358-3736bf10f70b@f9941",
+      "__uuid__": "9593b9a3-08dc-4eda-98fb-45c36ce9742f@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1159,9 +1159,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.525,
-      "y": 0.525,
-      "z": 0.525
+      "x": 0.576,
+      "y": 0.576,
+      "z": 0.576
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -1216,12 +1216,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "db602cd8-b80b-451b-ac6a-15356671891a@f9941",
+      "__uuid__": "43355437-64ee-47ac-a316-a76862b95329@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1307,8 +1307,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 2244,
-      "height": 701
+      "width": 2996.4,
+      "height": 962
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1338,12 +1338,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "fb2d64e5-a804-4da6-9ea8-37dce9014346@f9941",
+      "__uuid__": "a251317f-1ed4-4ca5-8570-b7f963fd7279@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -6680,8 +6680,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 603.595703125,
-      "height": 225.99999999999997
+      "width": 639.2032470703125,
+      "height": 126
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6710,11 +6710,11 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Can You Spot \nthe Real Emotion ?",
+    "_string": "Find the real Emotion!",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 70.3,
-    "_fontSize": 70.3,
+    "_actualFontSize": 63.3,
+    "_fontSize": 63.3,
     "_fontFamily": "Arial",
     "_lineHeight": 100,
     "_overflow": 0,
@@ -11794,9 +11794,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.43,
-      "y": 0.43,
-      "z": 0.478
+      "x": 0.438,
+      "y": 0.438,
+      "z": 0.487
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -12272,9 +12272,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.43,
-      "y": 0.43,
-      "z": 0.478
+      "x": 0.438,
+      "y": 0.438,
+      "z": 0.487
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -12448,9 +12448,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.43,
-      "y": 0.43,
-      "z": 0.478
+      "x": 0.438,
+      "y": 0.438,
+      "z": 0.487
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -12624,9 +12624,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.43,
-      "y": 0.43,
-      "z": 0.427
+      "x": 0.438,
+      "y": 0.438,
+      "z": 0.435
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -12922,9 +12922,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.426,
-      "y": 0.426,
-      "z": 0.472
+      "x": 0.453,
+      "y": 0.453,
+      "z": 0.502
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -13395,9 +13395,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.426,
-      "y": 0.426,
-      "z": 0.472
+      "x": 0.453,
+      "y": 0.453,
+      "z": 0.502
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -13571,9 +13571,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.426,
-      "y": 0.426,
-      "z": 0.472
+      "x": 0.453,
+      "y": 0.453,
+      "z": 0.502
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -13747,9 +13747,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.426,
-      "y": 0.426,
-      "z": 0.472
+      "x": 0.453,
+      "y": 0.453,
+      "z": 0.502
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -14045,9 +14045,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.434,
-      "y": 0.434,
-      "z": 0.482
+      "x": 0.465,
+      "y": 0.465,
+      "z": 0.516
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -14518,9 +14518,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.434,
-      "y": 0.434,
-      "z": 0.482
+      "x": 0.465,
+      "y": 0.465,
+      "z": 0.516
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -14694,9 +14694,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.434,
-      "y": 0.434,
-      "z": 0.482
+      "x": 0.465,
+      "y": 0.465,
+      "z": 0.516
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -14870,9 +14870,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.434,
-      "y": 0.434,
-      "z": 0.482
+      "x": 0.465,
+      "y": 0.465,
+      "z": 0.516
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -19907,9 +19907,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.455,
-      "y": 0.455,
-      "z": 0.455
+      "x": 0.489,
+      "y": 0.489,
+      "z": 0.489
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -20070,8 +20070,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -95.032,
-      "y": -23.804,
+      "x": -100.453,
+      "y": -23.803,
       "z": 0
     },
     "_lrot": {
@@ -20083,9 +20083,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.415,
-      "y": 0.415,
-      "z": 0.415
+      "x": 0.446,
+      "y": 0.446,
+      "z": 0.446
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -20248,8 +20248,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 146.23,
-      "y": -23.804,
+      "x": 138.794,
+      "y": -23.803,
       "z": 0
     },
     "_lrot": {
@@ -20261,9 +20261,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.415,
-      "y": 0.415,
-      "z": 0.415
+      "x": 0.446,
+      "y": 0.446,
+      "z": 0.446
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -20439,9 +20439,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.415,
-      "y": 0.415,
-      "z": 0.415
+      "x": 0.446,
+      "y": 0.446,
+      "z": 0.446
     },
     "_mobility": 0,
     "_layer": 33554432,
